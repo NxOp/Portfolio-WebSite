@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            padding: 10%;
+        }
+
+        h1 {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+        a {
+            color: #f00;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .glitch {
+            color: #0f0;
+            animation: glitch 1s infinite alternate-reverse;
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            25% {
+                transform: translateY(-3px);
+                opacity: 0.75;
+            }
+            50% {
+                transform: translateY(3px);
+                opacity: 0.75;
+            }
+            75% {
+                transform: translateY(-2px);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(2px);
+                opacity: 1;
+            }
+        }
+
+        /* Style for the hidden button */
+        #secret-button {
+            display: none;
+            background-color: #0f0;
+            color: #000;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="glitch">404</h1>
+    <p>Page Not Found</p>
+    <p id="error-message"></p>
+    <p><a href="index.html">Return to Reality</a></p>
+
+    <!-- Hidden button -->
+    <button id="secret-button">Click for a Secret Code</button>
+
+    <script>
+        // Generate a random CTF-style error message
+        const errorMessages = [
+            "Error 404: Access Denied! This page is protected by elite hackers.",
+            "404 - You're not authorized to access this secret directory.",
+            "You've stumbled into a digital maze, but there's no way out!",
+            "This is a dead end, but can you find the hidden treasure?",
+        ];
+
+        const randomIndex = Math.floor(Math.random() * errorMessages.length);
+        const errorMessage = errorMessages[randomIndex];
+
+        // Display the error message
+        const errorMessageElement = document.getElementById("error-message");
+        errorMessageElement.textContent = errorMessage;
+
+        // Track the number of page refreshes using localStorage
+        let refreshCount = parseInt(localStorage.getItem("refreshCount")) || 0;
+        localStorage.setItem("refreshCount", refreshCount + 1);
+
+        // Show the secret button after the fourth refresh
+        if (refreshCount >= 3) {
+            const secretButton = document.getElementById("secret-button");
+            secretButton.style.display = "block";
+        }
+
+        // Add an event listener to the secret button
+        const secretButton = document.getElementById("secret-button");
+        secretButton.addEventListener("click", () => {
+            alert("Congratulations! You've unlocked the secret code: 1q2w3e4r");
+        });
+    </script>
+</body>
+</html>
